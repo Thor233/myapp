@@ -452,6 +452,11 @@
           <textarea id="question" rows="2" placeholder="写下你最近的困惑，让解析更准确..."></textarea>
         </div>
 
+        <div class="form-group" style="margin-top:12px;">
+          <label>访问密钥</label>
+          <input id="access-key" type="password" placeholder="输入密钥才能提交">
+        </div>
+
         <button class="submit-btn" id="submit-btn">进入抽卡仪式</button>
       </div>
     </div>
@@ -629,6 +634,8 @@
       const mbti = document.getElementById('mbti').value.trim();
       const question = document.getElementById('question').value.trim();
 
+      const accessKey = document.getElementById('access-key').value.trim();
+      if (!accessKey) return showToast('请输入访问密钥', 'error');
       if (!name) return showToast('请输入您的姓名', 'error');
       if (!zodiac) return showToast('请选择您的星座', 'error');
       if (!selectedTopic) return showToast('请选择一个占卜主题', 'error');
@@ -642,7 +649,7 @@
         formattedBirthday = parsedBirthday.toISOString().slice(0, 10); // Format to YYYY-MM-DD
       }
       
-      userData = { name, birthday: formattedBirthday, zodiac, mbti, topic: selectedTopic, question };
+      userData = { name, birthday: formattedBirthday, zodiac, mbti, topic: selectedTopic, question, accessKey };
 
       document.getElementById('form-view').style.display = 'none';
       initRitual();
